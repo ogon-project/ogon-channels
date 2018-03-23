@@ -1,0 +1,14 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+exec_prefix=@CMAKE_INSTALL_PREFIX@
+libdir=@CMAKE_INSTALL_FULL_LIBDIR@
+includedir=@CMAKE_INSTALL_PREFIX@/@OGON_CHANNELS_INCLUDE_DIR@
+libs=-logon-qtrdpclipchannelserver
+
+Name: ogon Qt RDP Clipboard Channel Server
+Description: ogon RDP clipboard channel server class for Qt
+URL: http://ogon-project.com/
+Version: @MODULE_VERSION_FULL@
+Requires: 
+Requires.private: ogon-qtrdpchannelserver1
+Libs: -L${libdir} ${libs}
+Cflags: -I${includedir}

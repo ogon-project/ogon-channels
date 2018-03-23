@@ -1,0 +1,53 @@
+cmake_minimum_required(VERSION 2.8)
+
+project(ogon-channels C CXX)
+
+set(CMAKE_COLOR_MAKEFILE ON)
+
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/include/")
+
+include(FindPkgConfig)
+include(FindFeature)
+include(GNUInstallDirsWrapper)
+
+set(CMAKE_SKIP_BUILD_RPATH FALSE)
+set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH FALSE)
+set(CMAKE_INSTALL_RPATH "\$ORIGIN/../${CMAKE_INSTALL_LIBDIR}")
+if(CMAKE_EXTRA_RPATH)
+	set(CMAKE_SKIP_RPATH FALSE)
+	set(CMAKE_SKIP_INSTALL_RPATH FALSE)
+	set(CMAKE_INSTALL_RPATH "${CMAKE_EXTRA_RPATH}")
+endif()
+
+if(NOT CMAKE_BUILD_TYPE)
+	set(CMAKE_BUILD_TYPE "Release")
+endif()
+
+
+set(WINPR_FEATURE_TYPE "REQUIRED")
+set(WINPR_FEATURE_PURPOSE "WINPR libraries and headers")
+set(WINPR_FEATURE_DESCRIPTION "WINPR")
+find_feature(WinPR ${WINPR_FEATURE_TYPE} ${WINPR_FEATURE_PURPOSE} ${WINPR_FEATURE_DESCRIPTION})
+include_directories(${WinPR_INCLUDE_DIR})
+
+
+set(OGON_CHANNELS_VERSION_MAJOR "1")
+set(OGON_CHANNELS_VERSION_MINOR "0")
+set(OGON_CHANNELS_VERSION_PATCH "0")
+set(OGON_CHANNELS_VERSION_FULL "${OGON_CHANNELS_VERSION_MAJOR}.${OGON_CHANNELS_VERSION_MINOR}.${OGON_CHANNELS_VERSION_PATCH}")
+
+set(OGON_CHANNELS_INCLUDE_DIR "include/ogon-channels${OGON_CHANNELS_VERSION_MAJOR}")
+
+add_subdirectory(common)
+add_subdirectory(rdpclip)
+add_subdirectory(rdpdr)
+if (WITH_EXAMPLE)
+	add_subdirectory(example)
+endif()
+
+file(GLOB OGON_CHANNELS_HEADERS "include/ogon-channels/qt/*.h")
+install(FILES ${OGON_CHANNELS_HEADERS} DESTINATION ${OGON_CHANNELS_INCLUDE_DIR}/ogon-channels/qt COMPONENT headers)
+install(FILES "include/ogon-channels/logging.h" DESTINATION ${OGON_CHANNELS_INCLUDE_DIR}/ogon-channels/ COMPONENT headers)

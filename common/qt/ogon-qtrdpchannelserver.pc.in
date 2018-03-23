@@ -1,0 +1,14 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+exec_prefix=@CMAKE_INSTALL_PREFIX@
+libdir=@CMAKE_INSTALL_FULL_LIBDIR@
+includedir=@CMAKE_INSTALL_PREFIX@/@OGON_CHANNELS_INCLUDE_DIR@
+libs=-logon-qtrdpchannelserver
+
+Name: ogon Qt RDP Channel Server
+Description: ogon RDP channel server class for Qt
+URL: http://ogon-project.com/
+Version: @MODULE_VERSION_FULL@
+Requires: 
+Requires.private: winpr2
+Libs: -L${libdir} ${libs}
+Cflags: -I${includedir}
