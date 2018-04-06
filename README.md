@@ -38,8 +38,7 @@ cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=/opt/ogon -DCMAKE_PREFIX_P
 make install
 ```
 
-
-[support]: https://github.com/ogon-project/ogon-project/SUPPORT.md
-[bugs]: https://github.com/ogon-project/ogon-project/SUPPORT.md#bugs
-[documentation]: https://github.com/ogon-project/ogon-project/SUPPORT.md#documentation
-[contribute]: https://github.com/ogon-project/ogon-project/CONTRIBUTING.md
+[support]: https://github.com/ogon-project/ogon-project/blob/master/SUPPORT.md
+[bugs]: https://github.com/ogon-project/ogon-project/blob/master/SUPPORT.md#bugs
+[documentation]: https://github.com/ogon-project/ogon-project/blob/master/SUPPORT.md#documentation
+[contribute]: https://github.com/ogon-project/ogon-project/blob/master/CONTRIBUTING.md
