@@ -1,0 +1,48 @@
+#!/usr/bin/make -f
+
+#export DH_VERBOSE=1
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+DPKG_EXPORT_BUILDFLAGS = 1
+include /usr/share/dpkg/buildflags.mk
+CFLAGS+=$(CPPFLAGS)
+CXXFLAGS+=$(CPPFLAGS)
+
+ifneq (,$(filter armhf,$(DEB_HOST_ARCH)))
+ARM_FLOAT_ABI = -DARM_FP_ABI=hard
+else
+ARM_FLOAT_ABI =
+endif
+
+NULL =
+
+DESTDIR = debian/tmp
+
+DEB_CMAKE_EXTRA_FLAGS :=  -DCMAKE_INSTALL_INCLUDEDIR=include/$(DEB_HOST_MULTIARCH) \
+	-DCMAKE_SKIP_RPATH=FALSE \
+	-DCMAKE_SKIP_INSTALL_RPATH=TRUE \
+	-DCMAKE_BUILD_TYPE=RELWITHDEBINFO \
+	-DCMAKE_SKIP_RPATH=FALSE \
+	-DCMAKE_SKIP_INSTALL_RPATH=FALSE \
+	-DCMAKE_INSTALL_LIBDIR=lib/$(DEB_HOST_MULTIARCH) \
+	-Wno-dev \
+	$(ARM_FLOAT_ABI) \
+	$(NULL)
+
+%:
+	dh $@ --parallel --with systemd
+
+.PHONY: override_dh_auto_configure override_dh_install override_dh_strip
+override_dh_auto_configure:
+	dh_auto_configure -- $(DEB_CMAKE_EXTRA_FLAGS)
+
+override_dh_install:
+	dh_install
+	dh_missing --fail-missing
+
+override_dh_strip:
+	dh_strip -pogon-channels --dbg-package=ogon-channels-dbg
+
+override_dh_clean:
+	dh_clean
+
+

@@ -10,7 +10,7 @@ Version:         1.0.0
 Release:         1
 Summary:         RDP channels for ogon
 Group:           Productivity/Networking/RDP
-License:         Apache-2.0
+License:         AGPL
 Url:             http://ogon-project.com
 #PreReq:
 Source:          ogon-channels.tar.xz

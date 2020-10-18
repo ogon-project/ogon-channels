@@ -1,0 +1,3 @@
+#usr/lib/*/cmake/*
+usr/lib/*/pkgconfig/*
+usr/include/ogon-channels1/*
