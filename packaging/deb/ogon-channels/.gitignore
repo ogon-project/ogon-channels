@@ -1,0 +1,11 @@
+*.log
+.debhelper/
+debhelper-build-stamp
+files
+*.substvars
+tmp
+ogon-channels-dbg/
+ogon-channels/
+ogon-channels-dev/
+
+*.debhelper
